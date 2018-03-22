@@ -44,7 +44,8 @@ def train(train_loader, model, criterion, optimizer, epoch, cfg):
 
         # forward, backward optimize
         preds = model(inputs_img)  # bz x C x H x W
-        preds = preds.squeeze()
+        preds = preds.squeeze(dim=-1)
+        preds = preds.squeeze(dim=-1)
         if cfg.model == 'googlenet':
             preds, aux = preds
             loss_main = criterion(preds, gt_labels)
@@ -126,7 +127,8 @@ def validate(val_loader, model, criterion, epoch, confusion_mat, cfg):
 
         # forward, backward optimize
         preds = model(input_img)  # bz x C x H x W
-        preds = preds.squeeze()
+        preds = preds.squeeze(dim=-1)
+        preds = preds.squeeze(dim=-1)
 
         loss = criterion(preds, gt_labels)
 
